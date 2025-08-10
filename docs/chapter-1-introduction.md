@@ -6,23 +6,24 @@
 
 ## Airflow components
 
-  - Web server: a Flask server with Gunicorn to access the UI
-  - Scheduler: responsible for tasks scheduling
-  - Metadata database: it stores information about DAGs connections, variables, users...
-      - Puede ser cualquier tipo de DB que soporte SQLAlchemy
-  - Executor: defines how to execute tasks
+  - DAG processor: parses DAG files and serializes them in the metadata database.
+  - Scheduler: triggers scheduled workflows and submits tasks to the executor.
+  - Executor: defines how to execute tasks.
       - Sequential executor (Por defecto)
       - Local executor: tareas paralelas en local
       - Docker executor
       - Celery executor
       - Custom made executors
+  - Web server: provides a user interface (UI) to inspect, trigger and debug the behaviour of dags and tasks.
+  - Metadata database: stores information about DAGs connections, variables, users...
+      - It may be any DB compatible with SQLAlchemy.
 
 
 ## Key concepts
 
-  - DAG: Visual representation of multiple tasks
+  - DAG: Directed Acyclic Graph. It is a way to represent workflows through tasks and their relationships.
   - Operator: a template for an Airflow task
-  - Task: an instance of an operator
+  - Task: It is an individual piece of work. In code, it is an instance of an operator or an `@task` decorated function.
   - Task instances: an execution of a task (with a timestamp)
   - Workflow: a combination of al the previous ones
 
